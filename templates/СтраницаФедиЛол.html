@@ -1,0 +1,51 @@
+{% extends "baseHTML.html" %}
+{% block style %}
+    <link href="static/FedyaStyle.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+<body style="background-color: aqua">
+{% block Kvass %}
+    <div class="main">
+        <div class="invis1">
+            <div class="icon">
+                <div class="iconInner">
+                    <img src="static/istockphoto-2041572395-612x612.jpg" class="profile">
+                </div>
+            </div>
+            <div class="search">
+                <form class="lenin">
+                    <input type="text" placeholder="Поиск" class="POISKTEXT">
+                </form>
+            </div>
+            <div class="menu">
+                <button class="menu" data-hamburger="true" aria-label="Меню">
+                    <div class="submenu">
+                        <span class="submenu1"></span>
+                        <span class="submenu2"></span>
+                        <span class="submenu2"></span>
+                        <span class="submenu3"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+     </div>
+    <div>
+            ㅤ
+    </div>
+    <div>
+        <table border="1" border-color="black">
+        <tr>
+            <td><b>Название Товара</b></td>
+            <td><b>Цена (руб)</b></td>
+            <td><b>Информация о товаре</b></td>
+            <td><b>Фотография</b></td>
+        </tr>
+        {% for book in bookshelf %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.info }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock Kvass %}

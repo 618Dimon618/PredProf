@@ -1,0 +1,327 @@
+#outerTable {
+    width: 100%;
+    height: fit-content;
+    margin: 15px;
+}
+
+.innerTable {
+    width: 100%;
+}
+
+.innerTable tr td:first-child {
+    width: 30%;
+}
+
+tbody {
+    vertical-align: baseline;
+}
+
+.content {
+    width: 100%;
+}
+
+.main {
+    width: 100%;
+    display: none;
+}
+
+#main0 {
+    height: 700px;
+    margin: auto;
+    background-color: rgba(236, 236, 236, 0);
+    border-width: 3px;
+    border-radius: 45px;
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+}
+
+.palka1488 {
+    width: 4px;
+    height: 700px;
+    background-color: black;
+}
+
+.submain0 {
+    width: 500px;
+    height: 700px;
+    background-color: rgba(78, 48, 8, 0);
+}
+
+.space {
+    width: 500px;
+    height: 50px;
+    background-color: rgba(240, 248, 255, 0);
+}
+
+.gitler1488 {
+    width: 350px;
+    height: 150px;
+    background-color: rgba(240, 248, 255, 0);
+}
+
+.lichni_kab {
+    width: 400px;
+    height: 100px;
+    margin-left: 30px;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: white;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.inform {
+    width: 300px;
+    height: 35px;
+    margin-top: 5px;
+    margin-left: 60px;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: black;
+    border-style: solid;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(51, 51, 51);
+    font-size: 15px;
+    align-items: center;
+    text-indent: 10px;
+}
+
+.gitler52 {
+    width: 500px;
+    height: 250px;
+    margin-top: 150px;
+}
+
+.menu {
+    width: 350px;
+    margin-left: 45px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+.menuitem:nth-child(2) {
+    background-color: rgb(143, 154, 163);
+}
+
+.menuitem {
+    width: 348px;
+    height: 50px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    text-indent: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+
+.main:nth-child(2) {
+    background-color: #3A7734;
+    display: flex;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0);
+    flex-direction: column;
+}
+
+.putin {
+    height: 700px;
+    background-color: rgba(240, 248, 255, 0);
+    display: flex;
+    flex-direction: row;
+}
+
+.submain10 {
+    width: 400px;
+    background-color: rgba(250, 235, 215, 0);
+    height: 300px;
+    margin: 30px;
+}
+
+.avatarkabutton {
+    width: 200px;
+    height: 200px;
+    border-color: black;
+    border-width: 2px;
+    margin-left: 50px;
+}
+
+.avatarka {
+    width: 200px;
+    height: 200px;
+    margin-left: 25px;
+}
+
+.avatext1 {
+    width: 250px;
+    height: px;
+    text-indent: 70px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+}
+
+.avatext2 {
+    width: 250px;
+    height: px;
+    text-indent: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+}
+
+.avatext3 {
+    width: 250px;
+    height: 20px;
+    text-indent: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+}
+
+.savefoto {
+    width: 250px;
+    height: 40px;
+    border-radius: 30px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(0, 117, 68);
+    background-color: rgb(21, 241, 149);
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    text-indent: 30px;
+    margin-top: 30px;
+    margin-right: 35px;
+}
+
+.maindannie {
+    height: 300px;
+}
+
+.content .main:nth-child(5) div {
+    text-align: center;
+    flex: 1;
+}
+
+.test {
+    height: 100px;
+    margin: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+    background-color: rgba(0, 255, 255, 0);
+}
+
+.row1 {
+    height: 40px;
+    width: 800px;
+    text-indent: 15px;
+    font-family: Arial;
+    font-size: 35px;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Familia {
+    height: 36px;
+    margin-top: 2px;
+    width: 400px;
+    text-indent: 20px;
+    font-family: Algerian;
+    font-size: 25px;
+    align-items: center;
+    color: #4e4e4e;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: inset;
+    margin-left: 41px;
+}
+
+.name {
+    height: 36px;
+    margin-top: 2px;
+    width: 400px;
+    text-indent: 20px;
+    font-family: Algerian;
+    font-size: 25px;
+    align-items: center;
+    color: #4e4e4e;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: inset;
+    margin-left: 123px;
+}
+
+.otchestvo {
+    height: 36px;
+    margin-top: 2px;
+    width: 400px;
+    text-indent: 20px;
+    font-family: Algerian;
+    font-size: 25px;
+    align-items: center;
+    color: #4e4e4e;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: inset;
+    margin-left: 40px;
+}
+.SNILS {
+    height: 36px;
+    margin-top: 2px;
+    width: 400px;
+    text-indent: 20px;
+    font-family: Algerian;
+    font-size: 25px;
+    align-items: center;
+    color: #4e4e4e;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: inset;
+    margin-left: 72px;
+}
+
+.classnomber {
+    height: 36px;
+    margin-top: 2px;
+    width: 36px;
+    text-indent: 3px;
+    font-family: Arial;
+    font-size: 30px;
+    align-items: center;
+    color: #4e4e4e;
+    border-width: 2px;
+    border-radius: 5px;
+    margin-left: 98px;
+    border-style: inset;
+}
+
+.classbykva {
+    height: 36px;
+    margin-top: 2px;
+    width: 36px;
+    text-indent: 3px;
+    font-family: Arial;
+    font-size: 30px;
+    align-items: center;
+    color: #4e4e4e;
+    border-width: 2px;
+    border-radius: 5px;
+    margin-left: 40px;
+    border-style: inset;
+}
+
+.palkaebalka {
+    width: 1300px;
+    height: 3px;
+    background-color: black;
+    margin-bottom: 300px;
+}
+
