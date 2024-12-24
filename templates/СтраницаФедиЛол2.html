@@ -10,6 +10,8 @@
     <div class="main">
         <header class="invis1">
             <div class="fon">
+                <tr>
+                    {% if authType.userTypeId == 1 %}
                 <div class="icon">
                     <div class="iconInner">
                     <a href="/profile">
@@ -52,24 +54,25 @@
 {% for book in bookshelf %}
         <tr>
                     <div class="pryamoygolnik">
-                        <div class="bookmain">
-                            <p>{{ book.title }}</p>
-                            <p>{{ book.author }} Рублей </p>
-                            <p>{{ book.info }} </p>
-                            <p>{{ book.Photo }} </p>
-                                {% if book.bookstatusid == 1 %}
-                                        <button class="bbb" id="book{{ book.id }}" data-userid="{{ book.userid }}" data-bookstatusid="{{ book.bookstatusid }}" onclick = "bookBooking({{ book.id }}"Забронировать</button>
-                                {% elif book.bookstatusid == 2 %}
-                                        <button class="bbb" id="book{{ book.id }}" data-userid="{{ book.userid }}" data-bookstatusid="{{ book.bookstatusid }}" onclick="giveBook({{ book.id }})">Отменить</button>
-                                {% elif book.bookstatusid == 3 %}
-                                        <button class="bbb" id="book{{ book.id }}" data-userid="{{ book.userid }}" data-bookstatusid="{{ book.bookstatusid }}" onclick="takeBook({{ book.id }})">Выдана</button>
-                                {% endif %}
+                        <div class="bookmain"> {{ book.title }}
+                            {{ book.author }}
+                            {{ book.info }}
+                            {{ book.Photo }}
+
+                                        {% if book.bookstatusid == 1 %}
+                                        <button class="bbb" id="book{{ book.id }}" data-userid="{{ book.userid }}" data-bookstatusid="{{ book.bookstatusid }}" disabled>Доступна</button>
+                                        {% elif book.bookstatusid == 2 %}
+                                        <button class="bbb" id="book{{ book.id }}" data-userid="{{ book.userid }}" data-bookstatusid="{{ book.bookstatusid }}" onclick="giveBook({{ book.id }})">Выдать</button>
+                                        {% elif book.bookstatusid == 3 %}
+                                        <button class="bbb" id="book{{ book.id }}" data-userid="{{ book.userid }}" data-bookstatusid="{{ book.bookstatusid }}" onclick="takeBook({{ book.id }})">Вернуть</button>
+                                        {% endif %}
                         </div>
                     </div>
 
         </tr>
         {% endfor %}
        </div>
+    </div>
     <div class="test">
    </div>
    <div id="modal" class="modal">

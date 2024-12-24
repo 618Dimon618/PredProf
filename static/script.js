@@ -11,10 +11,9 @@ let initEvents = function() {
     }
 }
 
-function getKlass(tn) {
+function getKlass() {
     $.ajax({
         url: '/getKlass',
-        data: {teacher_name: tn},
         method: 'get',
         success: function (res) {
             $('#tbodyStud tr').remove();
@@ -33,5 +32,136 @@ function getKlass(tn) {
         }
     });
 }
+
+function getMyBooks() {
+    $.ajax({
+        url: '/getMyBooks',
+        method: 'get',
+        success: function (res) {
+            for (let i = 0; i < res.length; i++) {
+                $('#tableMyBooks').append('<tr>\n' +
+                    '                        <td>' + res[i].title + '</td>\n' +
+                    '                        <td>' + res[i].author + '</td>\n' +
+                    '                        <td>' + res[i].info + '</td>\n' +
+                    '                    </tr>');
+            }
+        }
+    });
+}
+
+function bookBooking(book_id) {
+    $.ajax({
+        url: '/bb',
+        data: JSON.stringify({book_id: book_id}),
+        datatype: JSON,
+        contentType: 'application/json;charset=UTF-8',
+        method: 'post',
+        success: function (res) {
+            $('#book'+book_id)[0].innerText = "Отменить";
+            $('#book'+book_id)[0].removeAttribute('onClick');
+            $('#book'+book_id).off('click');
+            $('#book'+book_id).on('click', function() {cancelBookBooking(book_id)});
+        },
+        error: function (res) {
+            alert("Книга недоступна")
+        }
+    });
+}
+
+function cancelBookBooking(book_id) {
+    $.ajax({
+        url: '/cb',
+        data: JSON.stringify({book_id: book_id}),
+        datatype: JSON,
+        contentType: 'application/json;charset=UTF-8',
+        method: 'post',
+        success: function (res) {
+            $('#book'+book_id)[0].innerText = "Забронировать";
+            $('#book'+book_id)[0].removeAttribute('onClick');
+            $('#book'+book_id).off('click');
+            $('#book'+book_id).on('click', function() {bookBooking(book_id)});
+        }
+    });
+}
+
+function giveBook(book_id) {
+    $.ajax({
+        url: '/gb',
+        data: JSON.stringify({book_id: book_id}),
+        datatype: JSON,
+        contentType: 'application/json;charset=UTF-8',
+        method: 'post',
+        success: function (res) {
+            // $('#book'+book_id).attr("disabled", true);
+            $('#book'+book_id)[0].innerText = "Вернуть";
+            $('#book'+book_id)[0].removeAttribute('onClick');
+            $('#book'+book_id).off('click');
+            $('#book'+book_id).on('click', function() {takeBook(book_id)});
+        }
+    });
+}
+
+function takeBook(book_id) {
+    $.ajax({
+        url: '/tb',
+        data: JSON.stringify({book_id: book_id}),
+        datatype: JSON,
+        contentType: 'application/json;charset=UTF-8',
+        method: 'post',
+        success: function (res) {
+            $('#book'+book_id).attr("disabled", true);
+            $('#book'+book_id)[0].innerText = "Доступна";
+            $('#book'+book_id)[0].removeAttribute('onClick');
+        }
+    });
+}
+
+function logout() {
+    window.location.href = '/Kvass53'
+}
+
+function disableBooked() {
+    let userid = null
+    $.ajax({
+        url: '/getCurrentUserId',
+        method: 'get',
+        success: function (res) {
+            for (const el of document.getElementsByClassName('bbb')) {
+                if (el.dataset.userid !== "None" && res.userTypeId === 1) {
+                    if (Number(el.dataset.userid) === res.userId) { // моя книга
+                        if (Number(el.dataset.bookstatusid) === 2)
+                            el.innerText = 'Отменить'
+                    } else { // чужая книга
+                        el.setAttribute('disabled', 'disabled')
+                        if (Number(el.dataset.bookstatusid) === 2)
+                            el.innerText = 'Забронирована'
+                    }
+                }
+            }
+        }
+    });
+}
+
+    let modal = document.getElementById("modal");
+    let button = document.getElementById("menu");
+    let closeBtn = document.getElementsByClassName("close")[0];
+
+    button.onclick = function () {
+        modal.style.animation = "slideIn 0.5s forwards";
+        modal.style.display = "block";
+
+
+    }
+
+
+    closeBtn.onclick = function() {
+     modal.style.animation = "slideOut 0.5s forwards";
+
+      setTimeout(function() {
+        modal.style.animation = "";
+        modal.style.display = "none";
+     }, 500);
+}
+
 
 initEvents();

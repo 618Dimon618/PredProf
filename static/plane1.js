@@ -1,3 +1,10 @@
+$('body').on('click', '.chekker', function(){
+	if ($(this).is(':checked')){
+		$('#vvod').attr('type', 'text');
+	} else {
+		$('#vvod').attr('type', 'password');
+	}
+});
 function plane1(newTheme) {
     let p = document.getElementById("Kvass1");
     let a = document.getElementById("Palka69")

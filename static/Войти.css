@@ -30,7 +30,7 @@ button {
 }
 
 .Kvass1{
-    width: 38%;
+    width: 800px;
     height: 600px;
     margin: 0 auto;
     display: flex;
@@ -89,7 +89,7 @@ button {
 input[type = "text"]{
     border: 2px solid rgb(204, 204, 204);
     border-radius: 4px;
-    margin-top: 1%;
+    margin-top: 3%;
     height: 14%;
     width: 80%;
     margin-left: 10%;
@@ -195,3 +195,4 @@ input[type = "checkbox"]{
     width: 50%;
     margin: auto;
 }
+
