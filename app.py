@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify, redirect
-from models import db, Book, User, UserType, UserGrade
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+from models import db, Book, User, UserType, UserGrade, BookStatus
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from sqlalchemy import and_, or_
@@ -70,18 +70,18 @@ def register():
     return render_template('Регистрация.html', KvassMnogo=KvassMnogo, KvassInfinity=KvassInfinity)
 
 
+
 # регистрация
 @app.route('/Kvass1488', methods=['GET', 'POST'])
 def confirming1():
     global authType
     if request.method == 'POST':
         if User.query.filter_by(nickname=request.form['nickname']).first() is None:
-            usertype = UserType.query.filter_by(id=request.form['userTypeId']).first()
-            usergrade = UserGrade.query.filter_by(name=request.form['userGrade']).first()
+            usertype = UserType.query.filter_by(name=request.form['userTypeId']).first()
             hashed_password = generate_password_hash(request.form['password'])
-            user = User(nickname=request.form['nickname'], name=request.form['name'],
-                        last_name=request.form['last_name'], password=hashed_password, usertype_id=usertype.id,
-                        usergrade_id=usergrade.id)
+            user = User(nickname=request.form['nickname'],
+                        password=hashed_password, usertype_id=usertype.id,
+                        )
             db.session.add(user)
             db.session.commit()
             bookshelf = Book.query.all()
@@ -123,9 +123,6 @@ def get_userinfo():
     bbCount = Book.query.filter_by(userid=user.id, bookstatusid=2).count()
     gbCount = Book.query.filter_by(userid=user.id, bookstatusid=3).count()
     if user is not None:
-        authType['first_name'] = user.name
-        authType['last_name'] = user.last_name
-        authType['grade'] = UserGrade.query.filter_by(id=user.usergrade_id).first().name
         authType['bbcount'] = bbCount
         authType['gbcount'] = gbCount
 
@@ -205,7 +202,6 @@ def get_current_user_id():
 
 @app.route('/Kvass52', methods=['POST'])
 def confirming2():
-
     if request.method == "POST":
         global authType
         user = User.query.filter_by(nickname=request.form['nickname']).first()
@@ -226,7 +222,6 @@ def confirming2():
 @check_auth
 def confirming2get():
     if request.method == "GET":
-        user = User.query.filter_by(nickname=request.form['nickname']).first()
         bookshelf = Book.query.all()
         return render_template('СтраницаФедиЛол.html', bookshelf=bookshelf, num=len(bookshelf), authType=authType)
 
@@ -248,6 +243,66 @@ def search_book():
     if request.method == 'GET':
         books = Book.query.filter(or_(Book.title.like(st), Book.author.like(st), Book.info.like(st))).all()
         return render_template('СтраницаФедиЛол.html', bookshelf=books, num=len(books), authType=authType)
+
+
+
+
+# Страница админк
+
+
+@app.route('/admin_panel', methods=['GET', 'POST'])
+def admin_panel():
+    if request.method == 'POST':
+        if 'add_book' in request.form:
+            title = request.form['title']
+            author = request.form['author']
+            info = request.form['info']
+            book = Book(title=title, author=author, info=info, bookstatusid=1)
+            db.session.add(book)
+            db.session.commit()
+            return redirect(url_for('admin_panel'))
+
+    users = User.query.all()
+    books = Book.query.all()
+    return render_template('Admin.html', users=users, books=books)
+
+
+@app.route('/change_user_type/<int:user_id>', methods=['POST'])
+def change_user_type(user_id):
+    user = User.query.get(user_id)
+    if user:
+        user.usertype_id = 1 if user.usertype_id == 3 else 3
+        db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+
+@app.route('/admin_panel/delete/<int:book_id>', methods=['POST'])
+def delete_book(book_id):
+    book = Book.query.get(book_id)
+    if book:
+        db.session.delete(book)
+        db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+
+@app.route('/admin_panel/delete1/<int:user_id>', methods=['POST'])
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+
+@app.route('/admin_panel/status/<int:book_id>/<int:new_status>', methods=['POST'])
+def change_status(book_id, new_status):
+    book = Book.query.get(book_id)
+    if book:
+        book.bookstatusid = new_status
+        book.userid = None
+        db.session.commit()
+    return redirect(url_for('admin_panel'))
+
 
 
 if __name__ == '__main__':

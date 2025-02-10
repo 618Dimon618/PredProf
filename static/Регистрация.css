@@ -9,7 +9,7 @@ select{
     width: 81%;
     border: 2px solid rgb(204, 204, 204);
     border-radius: 4px;
-    margin-top: 2%;
+    margin-top: 5%;
 }
 
 .Main{
@@ -28,10 +28,12 @@ select{
 }
 
 .Kvass1{
-    width: 40%;
+    width: 710px;
+    height: 560px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 .Mewing{
@@ -48,6 +50,18 @@ select{
     border-radius: 10px;
 }
 
+
+.Name1{
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-family: "Arial Narrow";
+    font-size: 29px;
+    height: 7%;
+    border-radius: 90px;
+    align-items: center;
+    width: 70%;
+    margin-left: 15%;
+}
 .Text1{
     margin: 10px;
     font-family: Arial, sans-serif;
@@ -59,15 +73,16 @@ select{
 
 .Name{
     width: 70%;
-    height: 20%;
-    background-color: rgba(54,167,68,0.2);
+    height: 10%;
 }
+
 input[type = "text"]{
     border: 2px solid rgb(204, 204, 204);
     border-radius: 4px;
     width: 80%;
     margin-left: 10%;
-    margin-top: 2%;
+    margin-top: 10%;
+    height: 5%;
 }
 
 input[type = "password"]{
@@ -75,7 +90,8 @@ input[type = "password"]{
     border-radius: 4px;
     width: 80%;
     margin-left: 10%;
-    margin-top: 2%;
+    margin-top: 10%;
+    height: 5%;
 }
 
 .Register{
@@ -84,6 +100,8 @@ input[type = "password"]{
     font-family: Arial, sans-serif;
     border-radius: 4px;
     width: 90%;
+    margin-top: 10%;
+    height: 10%;
 }
 
 .Register:hover{
@@ -93,7 +111,7 @@ input[type = "password"]{
 
 .Enter{
     width: 50%;
-    height: 12%;
+    height: 10%;
     font-size: 18px;
     margin-left: 25%;
 }

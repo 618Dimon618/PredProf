@@ -1,0 +1,113 @@
+
+<style>
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 20px; }
+    h1 { color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+    th { background-color: #e2e2e2; }
+    tr:hover { background-color: #f1f1f1; }
+    form { display: inline; }
+    input, button { margin: 5px; padding: 10px; }
+    input[type="text"], input[type="number"], textarea { width: calc(100% - 22px); }
+    button { cursor: pointer; background-color: #007bff; color: white; border: none; }
+    button:hover { background-color: #0056b3; }
+</style>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Панель Администратора</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 20px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+        th { background-color: #e2e2e2; }
+        tr:hover { background-color: #f1f1f1; }
+        form { display: inline; }
+        input, button { margin: 5px; padding: 10px; }
+        input[type="text"], input[type="number"], textarea { width: calc(100% - 22px); }
+        button { cursor: pointer; background-color: #007bff; color: white; border: none; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Список пользователей</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nickname</th>
+            <th>Password</th>
+            <th>User Type</th>
+            <th>Статус</th>
+            <th>Удалить</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nickname }}</td>
+                <td>**</td>
+                <td>{{ 'Покупатель' if user.usertype_id == 1 else 'Администратор' }}</td>
+                <td>
+                    <form action="{{ url_for('change_user_type', user_id=user.id) }}" method="post">
+                        <button type="submit">{{ 'Сделать администратором' if user.usertype_id == 1 else 'Сделать покупателем' }}</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post">
+                        <button type="submit">Удалить</button>
+                    </form>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Добавить товар</h1>
+    <form method="post">
+        <input type="text" name="title" placeholder="Название" required>
+        <input type="text" name="author" placeholder="Цена" required>
+        <input type='text' name="info" placeholder="Информация" required>
+        <button type="submit" name="add_book">Добавить товар</button>
+    </form>
+
+    <h1>Список товаров</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Info</th>
+            <th>Status</th>
+            <th>Действия</th>
+        </tr>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.info }}</td>
+                <td>{{ 'Доступен' if book.bookstatusid == 1 else 'Забронирован' if book.bookstatusid == 2 else 'Куплен' if book.bookstatusid == 3 else 'Сломан' }}</td>
+                <td>
+                    <form action="{{ url_for('delete_book', book_id=book.id) }}" method="post">
+                        <button type="submit">Удалить</button>
+                    </form>
+                    <form action="{{ url_for('change_status', book_id=book.id, new_status=1) }}" method="post">
+<button type="submit">Отметить как Новый</button>
+                    </form>
+                    <form action="{{ url_for('change_status', book_id=book.id, new_status=2) }}" method="post">
+<button type="submit">Отметить как Используемый</button>
+                    </form>
+                    <form action="{{ url_for('change_status', book_id=book.id, new_status=3) }}" method="post">
+                        <button type="submit">Отметить как купленный</button>
+                    </form>
+                    <form action="{{ url_for('change_status', book_id=book.id, new_status=4) }}" method="post">
+                        <button type="submit">Отметить как сломанный</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+

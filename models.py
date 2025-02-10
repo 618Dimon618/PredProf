@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-
 db = SQLAlchemy()
 
 
@@ -13,8 +12,6 @@ class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(80), unique=True, nullable=False)
-    name = db.Column(db.String(80), nullable=False)
-    last_name = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(80), nullable=False)
     usertype_id = db.Column(db.Integer, db.ForeignKey('user_type.id'))
     usergrade_id = db.Column(db.Integer, db.ForeignKey('user_grade.id'))
@@ -26,6 +23,12 @@ class UserGrade(db.Model):
     name = db.Column(db.String(80), unique=True, nullable=False)
 
 
+class BookStatus(db.Model):
+    __tablename__ = 'book_status'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+
+
 class Book(db.Model):
     __tablename__ = 'book'
     id = db.Column(db.Integer, primary_key=True)
@@ -33,3 +36,4 @@ class Book(db.Model):
     author = db.Column(db.String(80), nullable=False)
     info = db.Column(db.Text, nullable=False)
     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+    bookstatusid = db.Column(db.Integer, db.ForeignKey('book_status.id'))
